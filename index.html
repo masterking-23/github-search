@@ -5,28 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Devfinder Tailwind</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+    
+    body {
+      font-family: 'Space Mono', monospace;
+      background-color: #F6F8FF;
+    }
+    
+    .dark-mode {
+      background-color: #141D2F;
+      color: white;
+    }
+    
+    .dark-mode .header-bg {
+      background-color: #1E2A47;
+      color: white;
+    }
+    
+    .dark-mode .search-bg {
+      background-color: #1E2A47;
+      color: white;
+    }
+    
+    .dark-mode .profile-bg {
+      background-color: #1E2A47;
+      color: white;
+    }
+    
+    .dark-mode .text-dark {
+      color: white;
+    }
+  </style> 
 </head>
 <body class="">
   <div class="max-w-3xl mx-auto mt-6 px-4">
-    <div class="flex justify-between items-center bg-white p-4 rounded-xl shadow-sm">
-      
-
-      <h1 class="text-2xl font-bold text-[#222731]">devfinder</h1>
-
-
-      <a href="#" class="flex items-center text-[#697C9A] font-semibold text-sm">
+    <div class="flex justify-between items-center bg-white p-4 rounded-xl shadow-sm header-bg">
+      <h1 class="text-2xl font-bold text-[#222731] text-dark">devfinder</h1>
+      <button id="darkModeToggle" class="flex items-center text-[#697C9A] font-semibold text-sm">
         DARK
         <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M19.5133 11.3967C19.3087 11.3453 19.1041 11.3966 18.9251 11.5251C18.2602 12.0901 17.4929 12.5523 16.649 12.8605C15.8562 13.1687 14.9866 13.3228 14.066 13.3228C11.9944 13.3228 10.1019 12.4753 8.74647 11.1142C7.39102 9.75302 6.54707 7.85258 6.54707 5.77237C6.54707 4.89919 6.70051 4.0517 6.95626 3.28125C7.23758 2.45944 7.64677 1.71467 8.18383 1.07263C8.414 0.790132 8.36285 0.379226 8.08153 0.148091C7.90251 0.0196826 7.69792 -0.0316807 7.49332 0.0196826C5.31949 0.61036 3.42698 1.92012 2.07153 3.66648C0.767234 5.38715 0 7.51872 0 9.83007C0 12.6294 1.12528 15.1719 2.96664 17.0209C4.808 18.87 7.3143 20 10.1275 20C12.4803 20 14.6542 19.1782 16.3932 17.8171C18.1579 16.4303 19.4366 14.4528 19.9737 12.1928C20.076 11.8332 19.8714 11.4737 19.5133 11.3967Z" fill="#697C9A"/>
         </svg>
-      </a>
+      </button>
     </div>
   </div>
 
-  <div class="max-w-4xl mx-auto mt-6 px-4 ">
-    <div class="relative w-[730px] h-[69px]">
-      <!-- Search Icon (chapda) -->
-      <div class="absolute inset-y-0 left-0 flex items-center pl-4 -translate-y-[10px]">
+  <div class="max-w-3xl mx-auto mt-6 px-4">
+    <div class="relative w-full">
+      <!-- Search Icon (left side) -->
+      <div class="absolute inset-y-0 left-0 flex items-center pl-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 25 24">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6087 0C4.7591 0 0 4.74609 0 10.5797C0 16.4133 4.75915 21.1594 10.6087 21.1594C13.2162 21.1594 15.6071 20.2163 17.4563 18.6542L22.575 23.747C22.7449 23.9157 22.9664 24 23.1884 24C23.4118 24 23.635 23.9145 23.8049 23.7438C24.1435 23.4032 24.142 22.8527 23.8017 22.5139L18.6893 17.4274C20.2652 15.5807 21.2174 13.189 21.2174 10.5797C21.2174 4.74609 16.4582 0 10.6087 0ZM16.9346 16.7705C18.5071 15.1744 19.4782 12.9879 19.4782 10.5797C19.4782 5.70488 15.4994 1.73908 10.6087 1.73908C5.71794 1.73908 1.73913 5.70488 1.73913 10.5797C1.73913 15.4542 5.71794 19.4203 10.6087 19.4203C13.0163 19.4203 15.2029 18.4591 16.8027 16.9016C16.8211 16.879 16.8407 16.8571 16.8617 16.836C16.885 16.8125 16.9094 16.7907 16.9346 16.7705Z" fill="#0079FF"/>
         </svg>
@@ -36,21 +64,84 @@
       <input
         type="text"
         placeholder="Search GitHub username..."
-        class="w-full cursor-pointer py-[12.5px] pl-12 pr-32 rounded-xl bg-[#fefefe] border border-[#D0D7FF] shadow-sm focus:outline-none focus:ring-1 focus:ring-[#0079FF] text-sm"
+        class="w-full py-4 pl-12 pr-32 rounded-xl bg-white border border-[#D0D7FF] shadow-sm focus:outline-none focus:ring-1 focus:ring-[#0079FF] text-sm search-bg"
       />
   
+      <!-- Error Message -->
+      <div id="errorMessage" class="absolute right-32 top-4 text-red-500 text-sm hidden">
+        No results
+      </div>
 
-      <button class="absolute right-1 top-1 bottom-1 px-[20px] bg-[#0079FF] text-white text-sm font-medium rounded-xl hover:bg-[#005fcc] transition">
+      <button class="absolute right-2 top-2 px-6 py-2 bg-[#0079FF] text-white text-sm font-medium rounded-xl hover:bg-[#005fcc] transition">
         Search
       </button>
     </div>
   </div>
 
-    <div class="ticket w-[400px] h-[400px] ">
-
+  <div class="max-w-3xl mx-auto mt-6 px-4">
+    <div class="bg-white p-8 rounded-xl shadow-sm profile-bg">
+      <div class="flex">
+        <div class="w-1/4">
+          <img src="https://avatars.githubusercontent.com/u/583231?v=4" alt="Octocat" class="rounded-full w-full max-w-[117px]">
+        </div>
+        <div class="w-3/4 pl-10">
+          <div class="flex justify-between items-start">
+            <div>
+              <h2 class="text-2xl font-bold text-dark">The Octocat</h2>
+              <p class="text-[#0079FF]">@octocat</p>
+            </div>
+            <p class="text-[#697C9A] text-sm">Joined 25 Jan 2011</p>
+          </div>
+          
+          <p class="mt-6 text-[#697C9A]">This profile has no bio</p>
+          
+          <div class="bg-[#F6F8FF]  rounded-xl p-5 mt-8 flex justify-between">
+            <div class="text-center">
+              <p class="text-[#697C9A] text-xs">Repos</p>
+              <p class="text-xl font-bold text-dark mt-2">8</p>
+            </div>
+            <div class="text-center">
+              <p class="text-[#697C9A] text-xs">Followers</p>
+              <p class="text-xl font-bold text-dark mt-2">3938</p>
+            </div>
+            <div class="text-center">
+              <p class="text-[#697C9A] text-xs">Following</p>
+              <p class="text-xl font-bold text-dark mt-2">9</p>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-y-4 mt-8">
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="20" fill="none" viewBox="0 0 14 20" class="mr-4">
+                <path d="M12.797 3.485A7.037 7.037 0 0 0 7 0a7.037 7.037 0 0 0-5.797 3.485c-1.066 1.562-1.552 3.4-1.427 5.31.157 2.425.933 4.749 2.291 6.715 1.368 1.98 3.218 3.49 5.292 4.29a.89.89 0 0 0 .78-.018 10.123 10.123 0 0 0 5.292-4.29c1.358-1.966 2.134-4.29 2.292-6.715.124-1.91-.362-3.748-1.428-5.31ZM7 9.814a2.907 2.907 0 1 1 0-5.814 2.907 2.907 0 0 1 0 5.814Z" fill="#4B6A9B"/>
+              </svg>
+              <span class="text-[#4B6A9B] text-sm">San Francisco</span>
+            </div>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20" class="mr-4">
+                <path d="M7.404 5.012c-2.355 2.437-1.841 6.482.857 8.273.089.06.207.048.283-.027.568-.555 1.049-1.093 1.47-1.776a.213.213 0 0 0-.084-.3A2.743 2.743 0 0 1 8.878 10.1a2.64 2.64 0 0 1-.223-1.803c.168-.815 1.043-1.573 1.711-2.274l-.004-.002 2.504-2.555a2.568 2.568 0 0 1 3.648-.019 2.6 2.6 0 0 1 .037 3.666l-1.517 1.56a.266.266 0 0 0-.06.273c.35 1.012.435 2.44.201 3.519-.006.03.031.05.053.028l3.228-3.295c2.062-2.105 2.044-5.531-.04-7.615a5.416 5.416 0 0 0-7.691.04L7.417 4.998l-.013.014Z" fill="#4B6A9B"/>
+              </svg>
+              <span class="text-[#4B6A9B] text-sm">Not Available</span>
+            </div>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20" class="mr-4">
+                <path d="M19.512 7.983h-4.966v-4.98c0-.108-.012-.225-.03-.344a.805.805 0 0 0-.236-.558.814.814 0 0 0-.559-.236c-.12-.018-.237-.03-.344-.03H.82a.814.814 0 0 0-.558.236.81.81 0 0 0-.236.558c-.018.12-.03.236-.03.344v13.959c0 .108.012.225.03.344.018.12.046.224.096.319a.817.817 0 0 0 .412.413c.095.05.199.078.32.096.118.018.235.03.343.03h13.958c.11 0 .226-.012.345-.03.119-.018.224-.046.319-.096a.817.817 0 0 0 .413-.412c.05-.096.078-.2.096-.32.018-.118.03-.235.03-.343v-4.982h4.966c.108 0 .225-.012.344-.03.118-.018.224-.046.318-.096a.817.817 0 0 0 .413-.412c.05-.095.078-.2.096-.32.018-.118.03-.234.03-.343V8.663c0-.108-.012-.225-.03-.344a.807.807 0 0 0-.096-.318.817.817 0 0 0-.413-.413.807.807 0 0 0-.318-.096c-.12-.017-.236-.03-.344-.03Z" fill="#4B6A9B"/>
+              </svg>
+              <span class="text-[#4B6A9B] text-sm">https://github.blog</span>
+            </div>
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20" class="mr-4">
+                <path d="M10 1.667c-1.5 0-2.75.46-3.75 1.38-1 .92-1.5 2.17-1.5 3.75 0 1.48.46 2.69 1.38 3.63.92.94 2.12 1.49 3.62 1.65l.25.02v1.35h-1.5v1.66h1.5v1.67h1.67v-1.67h1.66v-1.66h-1.66v-1.35l.25-.02c1.5-.16 2.7-.71 3.62-1.65.92-.94 1.38-2.15 1.38-3.63 0-1.58-.5-2.83-1.5-3.75-1-.92-2.25-1.38-3.75-1.38Zm0 1.66c1.08 0 2 .33 2.75 1 .75.66 1.13 1.54 1.13 2.6 0 1.03-.38 1.9-1.13 2.57-.75.66-1.67 1-2.75 1-1.07 0-2-.34-2.75-1-.75-.67-1.13-1.54-1.13-2.57 0-1.06.38-1.94 1.13-2.6.75-.67 1.68-1 2.75-1Zm-5 12.5v1.66h10v-1.66H5Z" fill="#4B6A9B"/>
+              </svg>
+              <span class="text-[#4B6A9B] text-sm">@github</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
+  </div>
 
+  
 </body>
 </html>
 
